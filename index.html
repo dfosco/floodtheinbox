@@ -41,7 +41,7 @@
       <form class="flex flex-col px-4 lg:px-0">
         <div class="bg-indigo-900 h-8 rounded-t-md flex items-center">
           <span class="text-gray-100 text-xs font-light pl-2">
-            Enter your email campaign here
+            Enter your email campaign here ↓
           </span>
         </div>
 
@@ -113,8 +113,29 @@ We are in the midst of widespread upheaval over the systemic violence of policin
         x-bind:class="{ 'opacity-50 cursor-not-allowed': !bodyValue && !senderValue && !subjectValue }"
         id="copy"
       >
-        Copy Link
+        Copy Link 🔗
       </button>
+      <form
+        action="https://tinyurl.com/create.php"
+        method="post"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <input
+          type="text"
+          name="url"
+          class="hidden"
+          x-bind:value="`mailto:${senderValue}?subject=${subjectValue}&body=${bodyValue}`"
+        />
+        <input
+          type="submit"
+          name="submit"
+          x-bind:disabled="!bodyValue && !senderValue && !subjectValue"
+          class="bg-purple-500 hover:bg-purple-700 text-white font-semi-bold text-lg mx-1 my-3 py-3 px-5 rounded"
+          x-bind:class="{ 'opacity-50 cursor-not-allowed': !bodyValue && !senderValue && !subjectValue }"
+          value="Make TinyURL 🐣🔗"
+        />
+      </form>
     </section>
     <script>
       function copy() {
