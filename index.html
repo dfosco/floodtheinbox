@@ -115,13 +115,6 @@ We are in the midst of widespread upheaval over the systemic violence of policin
       >
         Copy Link
       </button>
-      <a
-        class="bg-orange-500 hover:bg-orange-700 text-white font-semi-bold text-lg mx-1 my-3 py-3 px-5 rounded"
-        x-bind:href="`mailto:${senderValue}?subject=${subjectValue}&body=${bodyValue}`"
-        x-bind:class="{ 'opacity-50 cursor-not-allowed pointer-events-none': !bodyValue && !senderValue && !subjectValue }"
-      >
-        Open Link
-      </a>
     </section>
     <script>
       function copy() {
