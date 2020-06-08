@@ -33,9 +33,9 @@
       id="form"
       class="lg:w-9/12 w-full shadow-xl"
       x-data="{ 
-                     subjectValue: '', 
-                     senderValue: '', 
-                     bodyValue: ''}"
+                     senderValue: 'danielfosco@gmail.com', 
+                     subjectValue: 'TEST', 
+                     bodyValue: 'WAWAWAWA'}"
     >
       <form class="flex flex-col px-4 lg:px-0">
         <div class="bg-indigo-900 h-8 rounded-t-md flex items-center">
@@ -92,15 +92,17 @@ We are in the midst of widespread upheaval over the systemic violence of policin
           </textarea>
         </div>
       </form>
+      <div class="bg-gray-700 opacity-60 p-2">
+        <input
+          class="text-xs bg-transparent text-gray-200 font-semi-bold outline-none w-full block"
+          id="mailto"
+          x-bind:value="`mailto:${senderValue}?subject=${subjectValue}&body=${bodyValue}`"
+          type="text"
+        />
+      </div>
     </section>
 
     <section id="buttons" class="flex mt-1">
-      <input
-        class="opacity-0 absolute top-0 right-0 h-0 w-0"
-        id="mailto"
-        x-bind:value="`mailto:${senderValue}?subject=${subjectValue}&body=${bodyValue}`"
-        type="text"
-      />
       <button
         class="bg-blue-500 hover:bg-blue-700 text-white font-semi-bold text-lg mx-1 my-3 py-3 px-5 rounded"
         id="copy"
