@@ -5,75 +5,123 @@
     <title></title>
     <meta name="description" content="" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    
-    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
-    <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
-    <script src="https://unpkg.com/clipboard@2/dist/clipboard.min.js"></script>
 
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js"
+      defer
+    ></script>
   </head>
 
-  <body class="box-border bg-gray-400 h-screen flex flex-col items-center">
-    <section class="py-10">
-      <h1 class="text-4xl lg:text-6xl text-center font-extrabold">Flood the Inbox</h1>
-      <h3 class="font-medium text-gray-700 text-center">Easily create a magic link to send mass email campaigns</h3>
+  <body class="box-border bg-gray-900 h-screen flex flex-col items-center">
+    <section id="hero" class="py-10">
+      <h1 class="text-5xl lg:text-6xl text-center text-gray-100 font-extrabold">
+        Flood the Inbox
+      </h1>
+      <h3 class="font-medium text-gray-200 text-center">
+        Easily create a magic link to send mass email campaigns
+      </h3>
     </section>
-    <section id="form" 
-             class="lg:w-9/12 w-full"
-             x-data="{ 
-                     subjectValue: 'Example', 
-                     senderValue: 'example@email.com, example@email.com, example@email.com, example@email.com, example@email.com, example@email.com, example@email.com, example@email.com, example@email.com, example@email.com, example@email.com', 
-                     bodyValue: 'This is an example email'}" 
-      >
+    <section
+      id="form"
+      class="lg:w-9/12 w-full shadow-xl"
+      x-data="{ 
+                     subjectValue: '', 
+                     senderValue: '', 
+                     bodyValue: ''}"
+    >
       <form class="flex flex-col px-4 lg:px-0">
-          
-        <div class="bg-gray-800 h-8 rounded-t-md"> </div>
+        <div class="bg-indigo-900 h-8 rounded-t-md flex items-center">
+          <span class="text-gray-100 text-xs font-light pl-2">
+            Enter your email campaign here
+          </span>
+        </div>
 
-        <div class="bg-gray-100 flex items-center border-b border-gray-300 border-solid border-opacity-100">
+        <div
+          class="bg-gray-100 flex items-center border-b border-gray-300 border-solid border-opacity-100"
+        >
           <label for="sender" class="text-sm text-gray-700 m-0 p-2">To</label>
-          <textarea id="sender" class="text-sm bg-gray-100 border-opacity-0 p-1 pl-0 w-full h-8 flex-no-wrap resize-y"
-            type="text" x-bind:value="senderValue" x-model="senderValue"></textarea>
+          <textarea
+            id="sender"
+            placeholder="mayor.helpdesk@your-city.org, councilmember.name@your-city.org, councilmember.othername@your-city.org..."
+            class="text-sm placeholder-gray-800 bg-gray-100 border-opacity-0 p-1 pl-0 w-full h-8 flex-no-wrap resize-y"
+            type="email"
+            x-bind:value="senderValue"
+            x-model="senderValue"
+          >
+          </textarea>
         </div>
 
-        <div class="bg-gray-100 flex items-center border-b border-gray-300 border-solid border-opacity-100">
-          <label for="subject" class="text-sm text-gray-700 m-0 p-2">Subject</label>
-          <input id="subject" class="text-sm bg-gray-100 border-opacity-0 p-1 pl-0 w-full h-8 flex-no-wrap resize-y"
-            type="text" x-bind:value="subjectValue" x-model="subjectValue"/>
+        <div
+          class="bg-gray-100 flex items-center border-b border-gray-300 border-solid border-opacity-100"
+        >
+          <label for="subject" class="text-sm text-gray-700 m-0 p-2"
+            >Subject</label
+          >
+          <input
+            id="subject"
+            class="text-sm placeholder-gray-800 bg-gray-100 border-opacity-0 p-1 pl-0 w-full h-8 flex-no-wrap resize-y"
+            placeholder="DEFUND THE POLICE NOW!"
+            type="text"
+            x-bind:value="subjectValue"
+            x-model="subjectValue"
+          />
         </div>
 
-        <div class="bg-gray-100 flex flex-col items-start border-b border-gray-300 border-solid border-opacity-100">
+        <div
+          class="bg-gray-100 flex flex-col items-start border-b border-gray-300 border-solid border-opacity-100"
+        >
           <label for="body" class="text-sm text-gray-700 m-0 p-2">Body</label>
-          <textarea id="body" class="text-sm bg-gray-100 border-opacity-0 p-2 w-full h-40 flex-no-wrap resize-y" type="text"
-            x-bind:value="bodyValue" x-model="bodyValue"></textarea>
-        </div>        
+          <textarea
+            id="body"
+            class="text-sm placeholder-gray-800 bg-gray-100 border-opacity-0 p-2 w-full h-40 flex-no-wrap resize-y"
+            type="text"
+            placeholder="I am a resident of [YOUR DISTRICT]. I am writing to demand that the City Council adopt a People’s Budget that prioritizes community wellbeing and redirects funding away from the police.
+
+We are in the midst of widespread upheaval over the systemic violence of policing, embodied by the police department’s well documented history of murdering Black people. We will no longer accept empty gestures and suggestions of “reform”..."
+            x-bind:value="bodyValue"
+            x-model="bodyValue"
+          >
+          </textarea>
+        </div>
       </form>
-    
-      <a class="flex justify-center items-center box-border m-4 p-5 text-center h-40 bg-blue-300 block font-semibold text-blue-900 hover:underline"
-        x-text='`mailto:${senderValue}?subject=${subjectValue}&body=${bodyValue}`'
-        x-bind:href='`mailto:${senderValue}?subject=${subjectValue}&body=${bodyValue}`'>
-        link
-      </a>
+    </section>
 
-      <textarea id="mailtolink" class="text-blue-900" value='wawa'>
-      </textarea>
+    <section id="buttons" class="flex mt-1">
+      <input
+        class="opacity-0 absolute top-0 right-0 h-0 w-0"
+        id="mailto"
+        x-bind:value="`mailto:${senderValue}?subject=${subjectValue}&body=${bodyValue}`"
+        type="text"
+      />
+      <button
+        class="bg-blue-500 hover:bg-blue-700 text-white font-semi-bold text-lg mx-1 my-3 py-3 px-5 rounded"
+        id="copy"
+      >
+        Copy Link
+      </button>
+      <button
+        class="bg-orange-500 hover:bg-orange-700 text-white font-semi-bold text-lg mx-1 my-3 py-3 px-5 rounded"
+        id="copy"
+      >
+        Open Link
+      </button>
+    </section>
+    <script>
+      function copy() {
+        var copyText = document.querySelector("#mailto");
+        copyText.select();
+        document.execCommand("copy");
+      }
 
-                <textarea id="mailtolink" class="text-sm bg-gray-100 border-opacity-0 p-1 pl-0 w-full h-8 flex-no-wrap resize-y" type="text"
-                  placeholder="wawa"></textarea>
-
-      <button data-clipboard-target="#mailtolink">Copy to clipboard</button>
-      
-      </div>
-
-      <script>
-        var clipboard = new ClipboardJS('#mailtolink');
-
-        clipboard.on('success', function (e) {
-          console.log(e);
-        });
-
-        clipboard.on('error', function (e) {
-          console.log(e);
-        });
-      </script>
+      document.querySelector("#copy").addEventListener("click", copy);
+    </script>
   </body>
 </html>
