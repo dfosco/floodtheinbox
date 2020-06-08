@@ -6,6 +6,7 @@
     <meta name="description" content="" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
+    <link href="./style.css" rel="stylesheet" />
     <link
       href="https://fonts.googleapis.com/css2?family=Roboto&display=swap"
       rel="stylesheet"
@@ -20,23 +21,23 @@
     ></script>
   </head>
 
-  <body class="box-border bg-gray-900 h-screen flex flex-col items-center">
+  <body
+    class="box-border bg-gray-900 h-screen flex flex-col items-center"
+    x-data="{ 
+      senderValue: '', 
+      subjectValue: '', 
+      bodyValue: ''}
+    "
+  >
     <section id="hero" class="py-10">
       <h1 class="text-5xl lg:text-6xl text-center text-gray-100 font-extrabold">
         Flood the Inbox
       </h1>
       <h3 class="font-medium text-gray-200 text-center">
-        Easily create a magic link to send mass email campaigns
+        Easily create a magic link to share mass email campaigns
       </h3>
     </section>
-    <section
-      id="form"
-      class="lg:w-9/12 w-full shadow-xl"
-      x-data="{ 
-                     senderValue: 'danielfosco@gmail.com', 
-                     subjectValue: 'TEST', 
-                     bodyValue: 'WAWAWAWA'}"
-    >
+    <section id="form" class="lg:w-9/12 w-full shadow-xl">
       <form class="flex flex-col px-4 lg:px-0">
         <div class="bg-indigo-900 h-8 rounded-t-md flex items-center">
           <span class="text-gray-100 text-xs font-light pl-2">
@@ -51,7 +52,7 @@
           <textarea
             id="sender"
             placeholder="mayor.helpdesk@your-city.org, councilmember.name@your-city.org, councilmember.othername@your-city.org..."
-            class="text-sm placeholder-gray-800 bg-gray-100 border-opacity-0 p-1 pl-0 w-full h-8 flex-no-wrap resize-y"
+            class="text-sm placeholder-gray-600 bg-gray-100 border-opacity-0 p-1 pl-0 w-full h-8 flex-no-wrap resize-y"
             type="email"
             x-bind:value="senderValue"
             x-model="senderValue"
@@ -67,7 +68,7 @@
           >
           <input
             id="subject"
-            class="text-sm placeholder-gray-800 bg-gray-100 border-opacity-0 p-1 pl-0 w-full h-8 flex-no-wrap resize-y"
+            class="text-sm placeholder-gray-600 bg-gray-100 border-opacity-0 p-1 pl-0 w-full h-8 flex-no-wrap resize-y"
             placeholder="DEFUND THE POLICE NOW!"
             type="text"
             x-bind:value="subjectValue"
@@ -76,12 +77,14 @@
         </div>
 
         <div
-          class="bg-gray-100 flex flex-col items-start border-b border-gray-300 border-solid border-opacity-100"
+          class="bg-gray-100 flex flex-col lg:flex-row items-start border-b border-gray-300 border-solid border-opacity-100"
         >
-          <label for="body" class="text-sm text-gray-700 m-0 p-2">Body</label>
+          <label for="body" class="text-sm text-gray-700 m-0 p-2 w-auto"
+            >Body</label
+          >
           <textarea
             id="body"
-            class="text-sm placeholder-gray-800 bg-gray-100 border-opacity-0 p-2 w-full h-40 flex-no-wrap resize-y"
+            class="text-sm placeholder-gray-600 bg-gray-100 border-opacity-0 p-2 w-full h-40 flex-no-wrap resize-y"
             type="text"
             placeholder="I am a resident of [YOUR DISTRICT]. I am writing to demand that the City Council adopt a People’s Budget that prioritizes community wellbeing and redirects funding away from the police.
 
@@ -91,30 +94,34 @@ We are in the midst of widespread upheaval over the systemic violence of policin
           >
           </textarea>
         </div>
+        <div class="bg-gray-700 opacity-60 p-2">
+          <input
+            class="text-xs bg-transparent text-gray-200 font-semi-bold outline-none w-full block"
+            id="mailto"
+            x-bind:class="{ 'opacity-0': !bodyValue && !senderValue && !subjectValue }"
+            x-bind:value="`mailto:${senderValue}?subject=${subjectValue}&body=${bodyValue}`"
+            type="text"
+          />
+        </div>
       </form>
-      <div class="bg-gray-700 opacity-60 p-2">
-        <input
-          class="text-xs bg-transparent text-gray-200 font-semi-bold outline-none w-full block"
-          id="mailto"
-          x-bind:value="`mailto:${senderValue}?subject=${subjectValue}&body=${bodyValue}`"
-          type="text"
-        />
-      </div>
     </section>
 
     <section id="buttons" class="flex mt-1">
       <button
         class="bg-blue-500 hover:bg-blue-700 text-white font-semi-bold text-lg mx-1 my-3 py-3 px-5 rounded"
+        x-bind:disabled="!bodyValue && !senderValue && !subjectValue"
+        x-bind:class="{ 'opacity-50 cursor-not-allowed': !bodyValue && !senderValue && !subjectValue }"
         id="copy"
       >
         Copy Link
       </button>
-      <button
+      <a
         class="bg-orange-500 hover:bg-orange-700 text-white font-semi-bold text-lg mx-1 my-3 py-3 px-5 rounded"
-        id="copy"
+        x-bind:href="`mailto:${senderValue}?subject=${subjectValue}&body=${bodyValue}`"
+        x-bind:class="{ 'opacity-50 cursor-not-allowed pointer-events-none': !bodyValue && !senderValue && !subjectValue }"
       >
         Open Link
-      </button>
+      </a>
     </section>
     <script>
       function copy() {
