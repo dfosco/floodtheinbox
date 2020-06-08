@@ -22,23 +22,23 @@
   </head>
 
   <body
-    class="box-border bg-gray-900 h-screen flex flex-col items-center"
     x-data="{ 
-      senderValue: '', 
-      subjectValue: '', 
-      bodyValue: ''}
-    "
+        senderValue: new URLSearchParams(location.search).get('sender'), 
+        subjectValue: new URLSearchParams(location.search).get('subject'), 
+        bodyValue: new URLSearchParams(location.search).get('body')
+      }"
+    class="box-border bg-gray-900 h-screen flex flex-col items-center"
   >
-    <section id="hero" class="py-10">
+    <header id="hero" class="py-10">
       <h1 class="text-5xl lg:text-6xl text-center text-gray-100 font-extrabold">
         Flood the Inbox
       </h1>
       <h3 class="font-medium text-gray-200 text-center">
         Easily create a magic link to share mass email campaigns
       </h3>
-    </section>
-    <section id="form" class="lg:w-9/12 w-full shadow-xl">
-      <form class="flex flex-col px-4 lg:px-0">
+    </header>
+    <main class="lg:w-9/12 w-full">
+      <form class="flex flex-col px-4 lg:px-0 shadow-xl">
         <div class="bg-indigo-900 h-8 rounded-t-md flex items-center">
           <span class="text-gray-100 text-xs font-light pl-2">
             Enter your email campaign here ↓
@@ -104,39 +104,44 @@ We are in the midst of widespread upheaval over the systemic violence of policin
           />
         </div>
       </form>
-    </section>
 
-    <section id="buttons" class="flex mt-1">
-      <button
-        class="bg-blue-500 hover:bg-blue-700 text-white font-semi-bold text-lg mx-1 my-3 py-3 px-5 rounded"
-        x-bind:disabled="!bodyValue && !senderValue && !subjectValue"
-        x-bind:class="{ 'opacity-50 cursor-not-allowed': !bodyValue && !senderValue && !subjectValue }"
-        id="copy"
+      <section
+        id="buttons"
+        class="flex flex-col mt-1 justify-center items-center"
       >
-        Copy Link 🔗
-      </button>
-      <form
-        action="https://tinyurl.com/create.php"
-        method="post"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        <input
-          type="text"
-          name="url"
-          class="hidden"
-          x-bind:value="`mailto:${senderValue}?subject=${subjectValue}&body=${bodyValue}`"
-        />
-        <input
-          type="submit"
-          name="submit"
-          x-bind:disabled="!bodyValue && !senderValue && !subjectValue"
-          class="bg-purple-500 hover:bg-purple-700 text-white font-semi-bold text-lg mx-1 my-3 py-3 px-5 rounded"
-          x-bind:class="{ 'opacity-50 cursor-not-allowed': !bodyValue && !senderValue && !subjectValue }"
-          value="Make TinyURL 🐣🔗"
-        />
-      </form>
-    </section>
+        <div class="flex mt-1 justify-center">
+          <button
+            class="bg-blue-500 hover:bg-blue-700 text-white font-semi-bold text-lg mx-1 my-3 py-3 px-5 rounded"
+            x-bind:disabled="!bodyValue && !senderValue && !subjectValue"
+            x-bind:class="{ 'opacity-50 cursor-not-allowed': !bodyValue && !senderValue && !subjectValue }"
+            id="copy"
+          >
+            Copy magic link 🔗
+          </button>
+          <form
+            action="https://tinyurl.com/create.php"
+            method="post"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <input
+              type="text"
+              name="url"
+              class="hidden"
+              x-bind:value="`mailto:${senderValue}?subject=${subjectValue}&body=${bodyValue}`"
+            />
+            <input
+              type="submit"
+              name="submit"
+              x-bind:disabled="!bodyValue && !senderValue && !subjectValue"
+              class="bg-purple-500 hover:bg-purple-700 cursor-pointer text-white font-semi-bold text-lg mx-1 my-3 py-3 px-5 rounded"
+              x-bind:class="{ 'opacity-50 cursor-not-allowed': !bodyValue && !senderValue && !subjectValue }"
+              value="Make a short URL 🐣🔗"
+            />
+          </form>
+        </div>
+      </section>
+    </main>
     <script>
       function copy() {
         var copyText = document.querySelector("#mailto");
