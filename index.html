@@ -24,7 +24,6 @@
       property="og:image"
       content="https://floodtheinbox.netlify.app/images/card-image.png"
     />
-    <link href="./style.css" rel="stylesheet" />
     <link
       href="https://fonts.googleapis.com/css2?family=Roboto&display=swap"
       rel="stylesheet"
@@ -58,8 +57,10 @@
     <main class="lg:w-9/12 w-full px-4 lg:px-0">
       <form class="flex flex-col shadow-xl">
         <div class="bg-indigo-900 h-8 rounded-t-md flex items-center">
-          <span class="text-gray-100 text-xs font-light pl-2">
-            Enter your email campaign here ↓
+          <span
+            class="text-gray-100 text-xs font-light pl-2"
+            x-text="[subjectValue || 'Enter your email campaign here ↓']"
+          >
           </span>
         </div>
 
@@ -104,7 +105,9 @@
             id="body"
             class="text-sm placeholder-gray-600 bg-gray-100 border-opacity-0 p-2 w-full h-40 flex-no-wrap resize-y"
             type="text"
-            placeholder="I am a resident of [YOUR DISTRICT]. I am writing to demand that the City Council adopt a People’s Budget that prioritizes community wellbeing and redirects funding away from the police.
+            placeholder="[This is a placeholder, enter your text here]
+            
+I am a resident of [YOUR DISTRICT]. I am writing to demand that the City Council adopt a People’s Budget that prioritizes community wellbeing and redirects funding away from the police.
 
 We are in the midst of widespread upheaval over the systemic violence of policing, embodied by the police department’s well documented history of murdering Black people. We will no longer accept empty gestures and suggestions of “reform”..."
             x-bind:value="bodyValue"
@@ -167,8 +170,8 @@ We are in the midst of widespread upheaval over the systemic violence of policin
             Email link not working correctly?
           </span>
           <span class="text-center text-sm text-gray-100 max-w-xl">
-            Send <span class="inline underline">this page</span> so others can
-            copy and paste the recipients, subject and messages
+            Send <span class="inline underline">the link to this page</span> so
+            others can copy and paste the recipients, subject and body
           </span>
         </a>
       </section>
